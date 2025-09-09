@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>حارس - إنشاء حساب جديد</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: {
+          display: ['Tajawal', 'sans-serif'],
+          body: ['Tajawal', 'sans-serif']
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white min-h-screen flex items-center justify-center p-4">
+
+  <div class="max-w-md w-full bg-white/10 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
+    
+    <!-- الشعار -->
+    <div class="text-center py-8 bg-gradient-to-r from-blue-600 to-purple-700">
+      <div class="inline-block animate-float">
+        <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+          <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.165-2.052-.48-3.006z"/>
+          </svg>
+        </div>
+      </div>
+      <h1 class="text-2xl font-bold">إنشاء حساب جديد</h1>
+      <p class="text-blue-100 text-sm">ابدأ تجربتك المجانية 14 يومًا</p>
+    </div>
+
+    <!-- نموذج التسجيل -->
+    <div class="p-8">
+      <form id="signupForm">
+        <div class="space-y-6">
+
+          <!-- الاسم الكامل -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">الاسم الكامل</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              placeholder="أدخل اسمك الكامل" 
+              required 
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          <!-- البريد الإلكتروني -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">البريد الإلكتروني</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              placeholder="example@domain.com" 
+              required 
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          <!-- كلمة المرور -->
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-300 mb-2">كلمة المرور</label>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder="أدخل كلمة المرور" 
+              required 
+              class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
+
+          <!-- زر التسجيل -->
+          <button 
+            type="submit" 
+            class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition duration-200 transform hover:scale-105 shadow-lg"
+          >
+            إنشاء الحساب
+          </button>
+
+        </div>
+      </form>
+
+      <!-- رابط تسجيل الدخول -->
+      <div class="text-center mt-6">
+        <p class="text-gray-400 text-sm">
+          لديك حساب بالفعل؟ 
+          <a href="/login" class="text-blue-400 hover:text-blue-300 font-medium transition duration-200">تسجيل الدخول</a>
+        </p>
+      </div>
+
+      <!-- شروط الاستخدام -->
+      <div class="text-center mt-4">
+        <p class="text-xs text-gray-500">
+          بالتسجيل، أنت توافق على 
+          <a href="#terms" class="text-gray-400 hover:text-white">شروط الاستخدام</a> و
+          <a href="#privacy" class="text-gray-400 hover:text-white">سياسة الخصوصية</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      alert(`تم إنشاء الحساب بنجاح، ${name}! ✅\nسنصلك عبر البريد ${email} لتفعيل الاشتراك.`);
+      // في الإصدار الحقيقي: window.location.href = '/dashboard';
+    });
+  </script>
+
+</body>
+</html>
