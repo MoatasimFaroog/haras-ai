@@ -20,6 +20,11 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'login.html'));
 });
 
+// صفحة إنشاء الحساب (signup)
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'signup.html'));
+});
+
 // صفحة خطط الاشتراك
 app.get('/pricing', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'pricing.html'));
