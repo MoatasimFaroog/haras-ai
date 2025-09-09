@@ -28,9 +28,9 @@
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white min-h-screen">
 
-  <!-- 🔥 زر تسجيل الدخول تم إضافته هنا -->
-  <div class="text-left px-4 py-3">
-    <a href="/login" class="text-blue-400 hover:text-blue-300 font-medium transition duration-200 text-sm">
+  <!-- 🔴 زر تسجيل الدخول (تمت إضافته هنا في الزاوية اليسرى) -->
+  <div class="px-6 py-4">
+    <a href="/login" class="text-blue-400 hover:text-blue-300 font-medium text-sm transition duration-200">
       تسجيل الدخول
     </a>
   </div>
@@ -48,3 +48,157 @@
       <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">حارس</h1>
       <p class="text-xl text-gray-300">النظام المحاسبي الذكي للربط بين البنك وOdoo</p>
     </div>
+
+    <!-- تجربة مجانية -->
+    <div class="text-center mb-12">
+      <div class="inline-block bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30 rounded-xl px-6 py-3">
+        <span class="font-bold text-green-300">🎉 تجربة مجانية لمدة 14 يومًا — بدون بطاقة</span>
+      </div>
+    </div>
+
+    <!-- خطط الاشتراك -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- الخطة الأساسية -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 text-center hover:scale-105 transition-transform duration-300">
+        <h3 class="text-2xl font-bold mb-2">الأساسية</h3>
+        <div class="text-4xl font-bold mb-4">299 <span class="text-sm opacity-80">ريال/شهريًا</span></div>
+        <p class="text-gray-400 mb-6">مثالية للشركات الصغيرة</p>
+        <ul class="space-y-3 mb-8 text-gray-300">
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>1 حساب بنكي</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>حتى 100 معاملة شهريًا</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>OCR تلقائي (PDF/صورة)</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse opacity-60">
+            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+            <span>لا يوجد تداول آلي</span>
+          </li>
+        </ul>
+        <button onclick="startTrial('starter')" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 py-3 rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition duration-200">
+          البدء مجانًا
+        </button>
+      </div>
+
+      <!-- الخطة الاحترافية (الأكثر شيوعًا) -->
+      <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-8 border border-yellow-500/30 text-center hover:scale-105 transition-transform duration-300 transform scale-105 relative">
+        <div class="bg-yellow-500 text-black px-4 py-1 rounded-full text-sm font-bold inline-block mb-4">الأكثر شيوعًا</div>
+        <h3 class="text-2xl font-bold mb-2">الاحترافية</h3>
+        <div class="text-4xl font-bold mb-4">799 <span class="text-sm opacity-80">ريال/شهريًا</span></div>
+        <p class="text-gray-400 mb-6">مثالية للمكاتب المحاسبية</p>
+        <ul class="space-y-3 mb-8 text-gray-300">
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>3 حسابات بنكية</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>حتى 500 معاملة شهريًا</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>تقرير تلقائي شهري</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>تقرير مجلس الإدارة (PDF)</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>توصيات تداول في الذهب</span>
+          </li>
+        </ul>
+        <button onclick="startTrial('pro')" class="w-full bg-gradient-to-r from-yellow-500 to-orange-600 py-3 rounded-xl font-medium hover:from-yellow-600 hover:to-orange-700 transition duration-200">
+          البدء مجانًا
+        </button>
+      </div>
+
+      <!-- الخطة المؤسسية -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 text-center hover:scale-105 transition-transform duration-300">
+        <h3 class="text-2xl font-bold mb-2">المؤسسية</h3>
+        <div class="text-4xl font-bold mb-4">2,499 <span class="text-sm opacity-80">ريال/شهريًا</span></div>
+        <p class="text-gray-400 mb-6">مثالية للشركات الكبيرة</p>
+        <ul class="space-y-3 mb-8 text-gray-300">
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>حسابات بنكية غير محدودة</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>معاملات غير محدودة</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>دعم فني 24/7</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>تقرير أسبوعي + شهري</span>
+          </li>
+          <li class="flex items-center justify-center space-x-2 space-x-reverse">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>تدريب فريقك</span>
+          </li>
+        </ul>
+        <button onclick="startTrial('enterprise')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 py-3 rounded-xl font-medium hover:from-green-600 hover:to-emerald-700 transition duration-200">
+          تواصل معنا
+        </button>
+      </div>
+    </div>
+
+    <!-- زر تجربة مجانية كبير -->
+    <div class="text-center mt-16">
+      <button onclick="startFreeTrial()" class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-12 py-4 rounded-2xl font-bold text-xl shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105">
+        ✅ ابدأ تجربتك المجانية 14 يومًا
+      </button>
+      <p class="text-gray-400 mt-4 text-sm">لا تحتاج بطاقة ائتمان — يمكنك الإلغاء في أي وقت</p>
+    </div>
+  </div>
+
+  <script>
+    function startTrial(plan) {
+      alert('شكرًا! سيتم توجيهك إلى صفحة الدفع لخطة: ' + plan);
+    }
+
+    function startFreeTrial() {
+      alert('تم تفعيل تجربتك المجانية! ستصلك تفاصيل الدخول عبر البريد.');
+    }
+  </script>
+
+</body>
+</html>
