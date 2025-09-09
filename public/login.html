@@ -3,46 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>حارس - الدخول</title>
+  <title>حارس - تسجيل الدخول</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Tajawal', sans-serif;
       background: linear-gradient(135deg, #1e3c72, #2a5298);
       color: white;
-      text-align: center;
-      padding: 50px;
       margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
+    .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    h1 { font-size: 2.5rem; margin-bottom: 20px; }
-    p { font-size: 1.2rem; margin-bottom: 30px; }
+    .logo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .logo svg {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      text-align: center;
+    }
+    .text-muted {
+      text-align: center;
+      color: #ccc;
+      margin: 15px 0 25px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      border-color: #4d90fe;
+      box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.3);
+    }
     .btn {
-      display: inline-block;
-      background: #ffD700;
-      color: #003366;
-      padding: 15px 30px;
-      margin: 10px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #4d90fe, #357ae8);
+      border: none;
+      border-radius: 12px;
+      color: white;
       font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
       transition: 0.3s;
     }
-    .btn:hover { transform: scale(1.05); }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(77, 144, 254, 0.4);
+    }
+    .links {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .links a {
+      color: #8ab4f8;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    .pricing-link {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .pricing-link a {
+      color: #ffd700;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .pricing-link a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🛡️ حارس</h1>
-    <p>النظام المحاسبي الذكي للربط بين البنك وOdoo</p>
-    <p>يدعم OCR، الصوت، الذكاء الاصطناعي، والتداول الآلي</p>
-    
-    <a href="/pricing" class="btn">عرض خطط الاشتراك</a>
-    <a href="#login" class="btn">تسجيل الدخول</a>
+  <div class="login-container">
+    <div class="logo">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.165-2.052-.48-3.006z"/>
+      </svg>
+      <h1>حارس</h1>
+      <p class="text-muted">النظام المحاسبي الذكي</p>
+    </div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required />
+      </div>
+      <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required />
+      </div>
+      <button type="submit" class="btn">تسجيل الدخول</button>
+    </form>
+
+    <div class="links">
+      <a href="#register">إنشاء حساب جديد</a> • <a href="#forgot">نسيت كلمة المرور؟</a>
+    </div>
+
+    <div class="pricing-link">
+      <a href="/pricing.html">عرض خطط الاشتراك</a>
+    </div>
   </div>
+
+  <script>
+    // منع الإرسال الفعلي مؤقتًا
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      alert(`مرحبًا ${email}! هذه النسخة تجريبية. في الإصدار الحقيقي، سيتم تسجيل دخولك إلى لوحة التحكم.`);
+      // في الإصدار الحقيقي: window.location.href = '/dashboard';
+    });
+  </script>
 </body>
 </html>
