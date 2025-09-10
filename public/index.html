@@ -1,48 +1,421 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>حارس - النظام المحاسبي الذكي</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Haras AI — المحاسبة الذكية</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Tajawal', sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: white;
-      text-align: center;
-      padding: 50px;
-      margin: 0;
+    /* Theme variables */
+    :root{
+      --bg:#0b0d12; --fg:#e7ebf2; --muted:#a7b1c2; --brand:#4f7cff; --brand-2:#22c55e;
+      --card:#121725; --stroke:#1f2433; --warn:#f59e0b; --good:#16a34a; --bad:#ef4444;
     }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
+    :root.light{
+      --bg:#ffffff; --fg:#0b1020; --muted:#54607a; --brand:#365df0;
+      --card:#f7f9fc; --stroke:#e6eaf2;
     }
-    h1 { font-size: 2.5rem; margin-bottom: 20px; }
-    p { font-size: 1.2rem; margin-bottom: 30px; }
-    .btn {
-      display: inline-block;
-      background: #ffD700;
-      color: #003366;
-      padding: 15px 30px;
-      margin: 10px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: 0.3s;
-    }
-    .btn:hover { transform: scale(1.05); }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font-family:Tajawal,system-ui}
+    a{color:var(--brand);text-decoration:none}
+    img{max-width:100%}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+    /* Navigation */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(11,13,18,.7);
+         backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--stroke);}
+    :root.light .nav{background:rgba(255,255,255,.7);}
+    .row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:700;}
+    .brand-badge{background:linear-gradient(135deg,var(--brand),#7c9bff);width:28px;height:28px;border-radius:8px;}
+    .nav-actions{display:flex;gap:10px;}
+    .btn{border:1px solid var(--stroke);background:transparent;color:var(--fg);
+         padding:10px 14px;border-radius:12px;cursor:pointer;}
+    .btn.brand{background:var(--brand);border-color:var(--brand);color:#fff}
+    .btn.ghost{background:transparent;}
+
+    /* Hero section */
+    .hero{padding:72px 0 32px;display:grid;gap:20px;}
+    .hero h1{font-size:42px;line-height:1.2;margin:0;}
+    .hero p{color:var(--muted);font-size:18px;margin:10px 0 0;}
+    .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+
+    /* Cards */
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:26px 0;}
+    .card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px;}
+    .card h3{margin:0 0 8px;font-size:18px;}
+    .pill{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:var(--muted);}
+    .muted{color:var(--muted);}
+
+    /* Sections */
+    .section{padding:36px 0;border-top:1px solid var(--stroke);}
+    .section h2{margin:0 0 16px;font-size:28px;}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+    @media (max-width:900px){.grid-2{grid-template-columns:1fr}}
+
+    /* Features showcase */
+    .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
+    .feature{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:16px;position:relative;}
+    .feature h3{margin:0 0 8px;font-size:18px;}
+    .feature .more{margin-top:10px;display:none;font-size:14px;color:var(--muted);}
+    .feature.expanded .more{display:block;}
+    .feature .toggle{position:absolute;top:12px;left:12px;border:none;background:transparent;color:var(--brand);cursor:pointer;}
+    .tooltip{border-bottom:1px dotted var(--muted);cursor:help;}
+
+    /* Demo preview */
+    .demo{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:16px;}
+    .demo input[type="file"]{display:none;}
+    .demo .drop{border:2px dashed var(--stroke);border-radius:14px;padding:18px;text-align:center;color:var(--muted);cursor:pointer;}
+    .demo .preview{margin-top:14px;display:none;}
+    .demo .preview.active{display:block;}
+    .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;background:var(--stroke);color:var(--muted);}
+
+    /* Testimonials slider */
+    .slider{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--stroke);background:var(--card);}
+    .slides{display:flex;transition:transform .5s ease;}
+    .testimonial{min-width:100%;padding:20px;}
+    .t-name{font-weight:700;}
+    .t-role{color:var(--muted);font-size:14px;}
+    .dots{display:flex;gap:6px;justify-content:center;padding:10px;}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--stroke);cursor:pointer;}
+    .dot.active{background:var(--brand);}
+
+    /* FAQ */
+    .faq-item{border:1px solid var(--stroke);border-radius:14px;background:var(--card);margin-bottom:10px;}
+    .faq-q{padding:14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+    .faq-a{padding:0 14px 14px;display:none;color:var(--muted);}
+    .faq-item.open .faq-a{display:block;}
+
+    /* Footer */
+    .footer{padding:30px 0;color:var(--muted);font-size:14px;text-align:center;}
+
+    /* RTL/LTR switch & theme preview */
+    .theme-swatch{width:28px;height:28px;border-radius:8px;border:1px solid var(--stroke);}
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>🛡️ حارس</h1>
-    <p>النظام المحاسبي الذكي للربط بين البنك وOdoo</p>
-    <p>يدعم OCR، الصوت، الذكاء الاصطناعي، والتداول الآلي</p>
-    
-    <a href="/pricing.html" class="btn">اشتراك تجريبي مجانا </a>
 
-  </div>
+<body>
+  <header class="nav">
+    <div class="container row">
+      <div class="brand">
+        <span class="brand-badge" aria-hidden="true"></span> Haras AI
+      </div>
+      <div class="nav-actions">
+        <button id="langBtn" class="btn ghost" title="Language / اللغة">AR</button>
+        <button id="themeBtn" class="btn ghost" title="Toggle theme">
+          <span class="theme-swatch"></span>
+        </button>
+        <a class="btn ghost" href="#features">المميزات</a>
+        <a class="btn brand" href="/pricing">الأسعار</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="container hero">
+      <div>
+        <span class="pill">ذكاء محاسبي • OCR • تكامل Odoo</span>
+        <h1>حوّل فواتيرك وإيصالاتك إلى قيود محاسبية دقيقة خلال ثوانٍ</h1>
+        <p>واجهة عربية بسيطة، معالجة ذكية لـ VAT في السعودية، وتكامل مع Odoo بضغطة واحدة.</p>
+        <div class="hero-cta">
+          <a class="btn brand" href="#demo">جرّب الآن</a>
+          <a class="btn ghost" href="#testimonials">آراء العملاء</a>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>سرعة وثبات</h3>
+          <p class="muted">استخراج ذكي للبيانات في أقل من 3 ثوانٍ للملفات الصغيرة مع تتبّع تقدّم للملفات الكبيرة.</p>
+        </div>
+        <div class="card">
+          <h3>دقة قابلة للمراجعة</h3>
+          <p class="muted">عرض جانبي: المستند الأصلي مقابل البيانات المستخرجة مع درجات الثقة وإمكانية التعديل.</p>
+        </div>
+        <div class="card">
+          <h3>تكامل Odoo</h3>
+          <p class="muted">إنشاء قيود <span class="tooltip" title="Journals">دفتر اليومية</span> وربط الموردين تلقائيًا.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo / Preview Section -->
+    <section id="demo" class="section">
+      <div class="container grid-2">
+        <div class="demo">
+          <h2>تجربة فورية — بدون تسجيل</h2>
+          <label class="drop" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
+            اسحب ملف PDF/صورة هنا أو اضغط للاختيار
+          </label>
+          <div class="preview" id="preview">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+              <span class="badge">نتائج تجريبية</span>
+              <button class="btn brand" id="postToOdooBtn">إرسال إلى Odoo (تجريبي)</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+              <div class="card">
+                <h3>المستخرج</h3>
+                <pre id="jsonOut" style="white-space:pre-wrap;margin:0;color:var(--muted)"></pre>
+              </div>
+              <div class="card">
+                <h3>ملخص</h3>
+                <ul id="summary" class="muted" style="margin:0;padding-inline-start:18px"></ul>
+              </div>
+            </div>
+          </div>
+          <p class="muted" style="margin-top:8px">ملاحظة: هذه معاينة محلية — لا نرفع ملفاتك في التجربة.</p>
+        </div>
+        <div class="card">
+          <h2>لماذا هذه التجربة؟</h2>
+          <p class="muted">لتشعر بسرعة الواجهة وسير العمل قبل الربط مع خدمة الـ AI الفعلية.</p>
+          <ul class="muted" style="line-height:1.8">
+            <li>توليد بيانات نموذجية قريبة من الواقع</li>
+            <li>عرض VAT المحسوب ودرجة الثقة</li>
+            <li>زر إرسال لـ Odoo (وضع تجريبي)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Showcase -->
+    <section id="features" class="section">
+      <div class="container">
+        <h2>المميزات الشاملة</h2>
+        <div class="features">
+          <article class="feature">
+            <button class="toggle">عرض المزيد</button>
+            <h3>استخراج OCR ذكي</h3>
+            <p class="muted">التعرّف على النصوص مع اكتشاف البنية (بند/كمية/سعر).</p>
+            <div class="more">
+              يدعم PDF وJPG/PNG مع تنظيف تلقائي للصورة لضمان دقة أعلى.
+            </div>
+          </article>
+          <article class="feature">
+            <button class="toggle">عرض المزيد</button>
+            <h3>VAT السعودية 15%</h3>
+            <p class="muted">حساب الضريبة بدقّة مع توضيح الأساس والـ Rounding.</p>
+            <div class="more">تحكم في حالات الإعفاء، أسقف الفواتير، وتقارير ملخّصة.</div>
+          </article>
+          <article class="feature">
+            <button class="toggle">عرض المزيد</button>
+            <h3>تكامل Odoo</h3>
+            <p class="muted">إنشاء قيود دفتر اليومية وربط الموردين تلقائيًا.</p>
+            <div class="more">اختيار بين “مسودّة” أو “نشر”، مع روابط العودة للمستند.</div>
+          </article>
+          <article class="feature">
+            <button class="toggle">عرض المزيد</button>
+            <h3>واجهة عربية مبسّطة</h3>
+            <p class="muted">دعم كامل للـ RTL وتبديل اللغة إلى الإنجليزية فورًا.</p>
+            <div class="more">اختصارات لوحة مفاتيح، وتحذيرات لطيفة لدرجات الثقة المنخفضة.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Testimonials -->
+    <section id="testimonials" class="section">
+      <div class="container">
+        <h2>ماذا يقول عملاؤنا؟</h2>
+        <div class="slider" aria-label="آراء العملاء">
+          <div class="slides" id="slides">
+            <div class="testimonial">
+              <p>“وفّر علينا ساعات من إدخال الفواتير يدويًا، والدقة ممتازة.”</p>
+              <div class="t-name">مؤسسة الراشد</div>
+              <div class="t-role">قطاع التجزئة</div>
+            </div>
+            <div class="testimonial">
+              <p>“أفضل تجربة عربية لمعالجة VAT رأيتها، واضحة وسلسة.”</p>
+              <div class="t-name">شركة صرح الخليج</div>
+              <div class="t-role">خدمات لوجستية</div>
+            </div>
+            <div class="testimonial">
+              <p>“التكامل مع Odoo اختصر وقت الإقفال الشهري للنصف.”</p>
+              <div class="t-name">زاوية محاسبة</div>
+              <div class="t-role">مكتب محاسبة</div>
+            </div>
+          </div>
+          <div class="dots" id="dots" role="tablist" aria-label="مؤشرات الشرائح"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <h2>الأسئلة الشائعة</h2>
+        <div class="faq-item">
+          <div class="faq-q">هل تُرفع مستنداتي في التجربة؟ <span>+</span></div>
+          <div class="faq-a">لا. المعاينة هنا محلية بالكامل وتُنشئ بيانات نموذجية على جهازك.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">كيف يتم احتساب الضريبة؟ <span>+</span></div>
+          <div class="faq-a">نستخدم قواعد VAT في السعودية مع ضبط التقريب وعرض الأساس.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">هل يدعم النظام Odoo؟ <span>+</span></div>
+          <div class="faq-a">نعم، ننشئ قيودًا كمسودّة أو ننشرها، مع ربط الموردين تلقائيًا.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section">
+      <div class="container card">
+        <div class="grid-2">
+          <div>
+            <h2>ابدأ الآن</h2>
+            <p class="muted">انطلق مجانًا، وارتقِ بخطتك لاحقًا عندما تحتاج.</p>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;justify-content:flex-end">
+            <a class="btn" href="/pricing">الأسعار</a>
+            <a class="btn brand" href="#demo">جرّب المعاينة</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © <span id="year"></span> Haras AI — كل الحقوق محفوظة
+  </footer>
+
+  <script>
+    // Utility selectors
+    const $  = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    // Year
+    $('#year').textContent = new Date().getFullYear();
+
+    // Smooth scroll for anchors
+    $$('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+
+    // Theme toggle
+    const themeBtn = $('#themeBtn');
+    const setTheme = (mode) => {
+      if(mode==='light'){ document.documentElement.classList.add('light'); }
+      else{ document.documentElement.classList.remove('light'); }
+      localStorage.setItem('theme',mode);
+    };
+    setTheme(localStorage.getItem('theme') || 'dark');
+    themeBtn.addEventListener('click', () => {
+      setTheme(document.documentElement.classList.contains('light')?'dark':'light');
+    });
+
+    // Language toggle (AR/EN)
+    const langBtn = $('#langBtn');
+    let lang = localStorage.getItem('lang') || 'AR';
+    const applyLang = (l) => {
+      document.documentElement.dir = (l==='AR')?'rtl':'ltr';
+      langBtn.textContent = l;
+      localStorage.setItem('lang',l);
+    };
+    applyLang(lang);
+    langBtn.addEventListener('click', () => {
+      lang = (lang==='AR') ? 'EN' : 'AR'; applyLang(lang);
+    });
+
+    // Feature toggles
+    $$('.feature .toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.feature');
+        card.classList.toggle('expanded');
+        btn.textContent = card.classList.contains('expanded')?'إخفاء':'عرض المزيد';
+      });
+    });
+
+    // FAQ accordion
+    $$('.faq-item').forEach(item => {
+      $('.faq-q',item).addEventListener('click',() => item.classList.toggle('open'));
+    });
+
+    // Testimonials slider
+    const slides   = $('#slides');
+    const dots     = $('#dots');
+    const total    = $$('.testimonial',slides).length;
+    let idx        = 0;
+    let timer;
+
+    const renderDots = () => {
+      dots.innerHTML = '';
+      for(let i=0;i<total;i++){
+        const d = document.createElement('button');
+        d.className = 'dot'+(i===idx?' active':'');
+        d.setAttribute('aria-label','slide '+(i+1));
+        d.addEventListener('click', ()=>{ idx=i; update(); });
+        dots.appendChild(d);
+      }
+    };
+    const update = () => {
+      slides.style.transform = `translateX(-${idx*100}%)`;
+      $$('.dot',dots).forEach((d,i) => d.classList.toggle('active', i===idx));
+      clearTimeout(timer);
+      timer = setTimeout(() => { idx = (idx+1)%total; update(); }, 4500);
+    };
+    renderDots(); update();
+
+    // Swipe support
+    let startX=0, dx=0;
+    slides.addEventListener('touchstart',e=>{ startX=e.touches[0].clientX; });
+    slides.addEventListener('touchmove',e=>{ dx=e.touches[0].clientX-startX; });
+    slides.addEventListener('touchend',() => {
+      if(Math.abs(dx)>40){ idx = (dx<0) ? (idx+1)%total : (idx-1+total)%total; update(); }
+      dx=0;
+    });
+
+    // Demo preview (mock)
+    const fileInput = $('#fileInput');
+    const dropZone  = $('#dropZone');
+    const preview   = $('#preview');
+    const jsonOut   = $('#jsonOut');
+    const summary   = $('#summary');
+
+    const sampleExtraction = (name='invoice.pdf') => ({
+      filename: name,
+      vendor  : 'متجر الساحة',
+      date    : new Date().toISOString().slice(0,10),
+      currency: 'SAR',
+      lines   : [
+        { desc:'مواد مكتبية', qty:2, unit_price:25.00, amount:50.00, taxable:true },
+        { desc:'شحن', qty:1, unit_price:10.00, amount:10.00, taxable:false }
+      ],
+      subtotal: 60.00, vat:7.50, total:67.50, confidence:0.93
+    });
+
+    const showResult = (data) => {
+      preview.classList.add('active');
+      jsonOut.textContent = JSON.stringify(data,null,2);
+      summary.innerHTML = `
+        <li>المورد: ${data.vendor}</li>
+        <li>التاريخ: ${data.date}</li>
+        <li>الإجمالي: ${data.total} ${data.currency} (VAT: ${data.vat})</li>
+        <li>الثقة: ${(data.confidence*100).toFixed(0)}%</li>
+      `;
+    };
+
+    dropZone.addEventListener('click',() => fileInput.click());
+    dropZone.addEventListener('dragover',e => { e.preventDefault(); dropZone.style.opacity=.8; });
+    dropZone.addEventListener('dragleave',() => dropZone.style.opacity=1);
+    dropZone.addEventListener('drop',e => {
+      e.preventDefault(); dropZone.style.opacity=1;
+      const f = e.dataTransfer.files?.[0]; showResult(sampleExtraction(f?.name || 'invoice.pdf'));
+    });
+    fileInput.addEventListener('change',() => {
+      const f = fileInput.files?.[0]; showResult(sampleExtraction(f?.name || 'invoice.pdf'));
+    });
+
+    // Post to Odoo (demo)
+    $('#postToOdooBtn').addEventListener('click',() => {
+      alert('وضع تجريبي: سيتم ربط هذا الزر بخدمة AI ثم Odoo في النشر الفعلي.');
+    });
+  </script>
 </body>
 </html>
